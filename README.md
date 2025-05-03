@@ -9,7 +9,6 @@
 
 <p align="center">
   <img src="images/GeoUni.png"  width="100%" height="auto">
-  <h3>GeoUni can generate diagrams, solve problems and create new problems.</h3>
 </p>
 
 ### Quick Start
