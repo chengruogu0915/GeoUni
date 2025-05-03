@@ -1,8 +1,23 @@
 <div align="center">
 <br>
 <img src="images/logo.jpg" width="166">
-<h3>A Unified Model for Generating Geometry Diagrams, Problems and Problem Solutions</h3>
+<h2>A Unified Model for Generating Geometry Diagrams, Problems and Problem Solutions</h2>
+
+[Jo-Ku Cheng](https://chengruogu0915.github.io/)<sup>1&#42;</sup>&nbsp;
+Zeren Zhang<sup>1&#42;</sup>&nbsp;
+Ran Chen<sup>1</sup>&nbsp;
+<br>
+Jingyang Deng<sup>1</sup>&nbsp;
+Ziran Qin<sup>2</sup>&nbsp;
+[Jinwen Ma](https://www.math.pku.edu.cn/teachers/jwma/homepage/)<sup>1</sup>
+
+
+<sup>1</sup> School of Mathematical Sciences, Peking University&nbsp; <sup>2</sup> School of Electronic, Information and Electrical Engineering, Shanghai Jiao Tong University&nbsp;
+ 
+[![ArXiv](https://img.shields.io/badge/ArXiv-<2504.10146>-<COLOR>.svg)](https://arxiv.org/abs/2504.10146) 
+
 </div>
+
 
 **Geo-MAGVIT**: 🤗 [Geo-MAGVIT](https://huggingface.co/JO-KU/Geo-MAGVIT) | **GeoUni**: 🤗 [GeoUni-Instruct](https://huggingface.co/JO-KU/GeoUni-Instruct) | **GeoUni-Reasoning-Adapter**: 🤗 [GeoUni-Reasoning-Adapter](https://huggingface.co/JO-KU/GeoUni-Reasoning-Adapter) 
 
@@ -49,3 +64,9 @@ To cite the paper and model, please use the below:
       url={https://arxiv.org/abs/2504.10146}, 
 }
 ```
+<div align="center">
+<br>
+<img src="docs/showo_title.png" width="166">
+<h3>One Single Transformer to Unify Multimodal Understanding and Generation</h3>
+
+  
