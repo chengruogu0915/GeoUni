@@ -12,7 +12,7 @@ Ziran Qin<sup>2</sup>&nbsp;
 [Jinwen Ma](https://www.math.pku.edu.cn/teachers/jwma/homepage/)<sup>1</sup>
 
 
-<sup>1</sup> School of Mathematical Sciences, Peking University&nbsp; <sup>2</sup> School of Electronic, Information and Electrical Engineering, Shanghai Jiao Tong University&nbsp;
+<sup>1</sup> Peking University&nbsp; <sup>2</sup> Shanghai Jiao Tong University&nbsp;
  
 [![ArXiv](https://img.shields.io/badge/ArXiv-<2504.10146>-<COLOR>.svg)](https://arxiv.org/abs/2504.10146) 
 
@@ -64,9 +64,6 @@ To cite the paper and model, please use the below:
       url={https://arxiv.org/abs/2504.10146}, 
 }
 ```
-<div align="center">
-<br>
-<img src="docs/showo_title.png" width="166">
-<h3>One Single Transformer to Unify Multimodal Understanding and Generation</h3>
+
 
   
