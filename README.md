@@ -1,6 +1,6 @@
 # GeoUni: A Unified Model for Generating Geometry Diagrams, Problems and Problem Solutions
 
-**Geo-MAGVIT**: 🤗 [Geo-MAGVIT](https://huggingface.co/JO-KU/Geo-MAGVIT) | **GeoUni**: 🤗 [GeoUni-1.5B](https://huggingface.co/JO-KU/GeoUni-Instruct) | **GeoUni-Reasoning-Adapter**: 🤗 [GeoUni-Reasoning-Adapter](https://huggingface.co/JO-KU/GeoUni-Reasoning-Adapter) 
+**Geo-MAGVIT**: 🤗 [Geo-MAGVIT](https://huggingface.co/JO-KU/Geo-MAGVIT) | **GeoUni**: 🤗 [GeoUni-Instruct](https://huggingface.co/JO-KU/GeoUni-Instruct) | **GeoUni-Reasoning-Adapter**: 🤗 [GeoUni-Reasoning-Adapter](https://huggingface.co/JO-KU/GeoUni-Reasoning-Adapter) 
 
 
 <p align="center">
@@ -15,7 +15,7 @@ Before running the script, install the following necessary dependencies.
 pip install torch==2.4.0 transformers==4.40.0 accelerate pillow sentencepiece
 ```
 
-
+## Infer
 ```python
 python simple_infer.py
 ```
