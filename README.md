@@ -42,29 +42,28 @@ The overview below illustrates the core components of GeoUni:
 </p>
 
 ### Quick Start
-Before running the script, install the following necessary dependencies. 
+Before running the script, install the following dependencies:
 
 ```shell
-pip install torch==2.4.0 transformers==4.40.0 accelerate pillow sentencepiece
+pip install -r requirements.txt
 ```
 
-### Inference
 To run a simple inference demo as shown above:
 
-Inference demo for **Diagram Generation**.
+#### Inference demo for Diagram Generation
 ```bash
 python simple_infer.py t2d \
   --prompt "Draw a geometric image based on this description: The diagram involves a circle centered at O with points A, B, C, D, and E all lying on it. Given values include ∠CAB=25° and ∠DEC=30°. Points AFMC, BMO, DNO, ENC, and BFE are collinear, indicating certain lines within the figure." 
 ```
 
-Inference demo for **Problem Solution**.
+#### Inference demo for Problem Solution
 ```bash
 python simple_infer.py mmu \
   --image_path ./images/6901.png \
   --question "As shown in the diagram, AB=OA, the center of \u2299O is O. Find the measure of \u2220BDA." 
 ```
 
-Inference demo for **Problem Creation**.
+#### Inference demo for Problem Creation
 ```python
 python simple_infer.py mixing \
   --prompt "Draw a diagram, create a question and answer based on the given knowledge point. Knowledge point: definition of a midpoint, definition of a median of a triangle, properties of a median, algebraic operations." 
