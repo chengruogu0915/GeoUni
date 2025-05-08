@@ -19,21 +19,37 @@ Ziran Qin<sup>2</sup>&nbsp;
 </div>
 
 
-**Geo-MAGVIT**: 🤗 [Geo-MAGVIT](https://huggingface.co/JO-KU/Geo-MAGVIT) | **GeoUni**: 🤗 [GeoUni-Instruct](https://huggingface.co/JO-KU/GeoUni-Instruct) | **GeoUni-Reasoning-Adapter**: 🤗 [GeoUni-Reasoning-Adapter](https://huggingface.co/JO-KU/GeoUni-Reasoning-Adapter) 
+<p align="center">
+  <b>Geo-MAGVIT</b>: 🤗 <a href="https://huggingface.co/JO-KU/Geo-MAGVIT">Geo-MAGVIT</a> &nbsp;|&nbsp;
+  <b>GeoUni-Instruct</b>: 🤗 <a href="https://huggingface.co/JO-KU/GeoUni-Instruct">GeoUni-Instruct</a> &nbsp;|&nbsp;
+  <b>GeoUni-Reasoning-Adapter</b>: 🤗 <a href="https://huggingface.co/JO-KU/GeoUni-Reasoning-Adapter">GeoUni-Reasoning-Adapter</a>
+</p>
 
 
 <p align="center">
   <img src="images/GeoUni.png"  width="100%" height="auto">
 </p>
 
+We propose **GeoUni**, the first unified geometry expert model capable of generating problem solutions and diagrams within a single framework in a way that enables the creation of unique and individualized geometry problems.
+
+The overview below illustrates the core components of GeoUni:  
+- <b>Geo-MAGVIT</b> serves as a specialized vision tokenizer for geometric diagrams, effectively capturing fine-grained structural features and enabling precise diagram reconstruction.
+- <b>GeoUni-Instruct</b> supports diagram generation, basic geometry problem-solving, and problem creation based on specific knowledge points.  
+- <b>GeoUni-Reasoning-Adapter</b> enhances the model’s reasoning capability and integrates seamlessly into the unified architecture.
+
+<p align="center">
+  <img src="images/Overview_geouni.png"  width="100%" height="auto">
+</p>
+
 ### Quick Start
-Before running the script, install the following necessary dependencies.
+Before running the script, install the following necessary dependencies. 
 
 ```shell
 pip install torch==2.4.0 transformers==4.40.0 accelerate pillow sentencepiece
 ```
 
-### Infer
+### Inference
+To run a simple inference demo as shown above:
 
 Inference demo for **Diagram Generation**.
 ```bash
