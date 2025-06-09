@@ -13,6 +13,7 @@ Ziran Qin<sup>2</sup>&nbsp;
 
 
 <sup>1</sup> Peking University&nbsp; <sup>2</sup> Shanghai Jiao Tong University&nbsp;
+</sup>&nbsp</sup> Both authors contributed equally to this research.
  
 [![ArXiv](https://img.shields.io/badge/ArXiv-<2504.10146>-<COLOR>.svg)](https://arxiv.org/abs/2504.10146) 
 
