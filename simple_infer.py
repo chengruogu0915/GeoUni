@@ -50,7 +50,7 @@ def image_transform(image: Image.Image, resolution: int = 512):
     return preprocess(image)
 
 
-def load_base_model(llm_path: str, device: torch.device):
+def load_model(llm_path: str, adapter_path: str, device: torch.device):
     """Load base GeoUni LLM."""
     model = AutoModelForCausalLM.from_pretrained(
         llm_path,
@@ -59,7 +59,7 @@ def load_base_model(llm_path: str, device: torch.device):
         device_map={"": device},
         trust_remote_code=True,
     ).to(device).eval()
-    tokenizer = AutoTokenizer.from_pretrained(llm_path, padding_side="left")
+    tokenizer = AutoTokenizer.from_pretrained(llm_path)
     prompting = UniversalPrompting(
         tokenizer,
         max_len=4096,
@@ -69,6 +69,11 @@ def load_base_model(llm_path: str, device: torch.device):
         ),
         ignore_id=-100,
     )
+    
+    # Attach reasoning adapter (LoRA) – only for MMU
+    model = PeftModel.from_pretrained(model, adapter_path).to(device)
+    model.eval()
+    
     return model, tokenizer, prompting
 
 
@@ -82,7 +87,7 @@ def run_mixing(model, prompting, vq_model, prompt: str, save_path: str, device: 
     input_ids, _ = prompting(prompt, "mix_gen")
     input_ids = input_ids.to(device)
 
-    with torch.no_grad():
+    with model.disable_adapter():
         image_tokens, text_tokens = model.mix_generate(
             input_ids=input_ids,
             max_new_tokens=2000,
@@ -108,7 +113,8 @@ def run_t2d(model, prompting, vq_model, prompt: str, save_path: str, device: tor
     input_ids, attention_masks = prompting(prompt, "t2i_gen")
     input_ids, attention_masks = input_ids.to(device), attention_masks.to(device)
 
-    with torch.no_grad():
+    
+    with model.disable_adapter():
         code_ids = model.t2i_generate(
             input_ids=input_ids,
             attention_masks=attention_masks,
@@ -124,10 +130,8 @@ def run_t2d(model, prompting, vq_model, prompt: str, save_path: str, device: tor
     print("[T2D] Image saved to", os.path.join(save_path, "geouni_t2i_sample.png"))
 
 
-def run_mmu(model, prompting, vq_model, adapter_path: str, image_path: str, question: str, device: torch.device):
-    # Attach reasoning adapter (LoRA) – only once for MMU
-    model = PeftModel.from_pretrained(model, adapter_path).to(device)
-    model.eval()
+def run_mmu(model, prompting, vq_model, image_path: str, question: str, device: torch.device):
+    
 
     # Prepare image tokens
     img = Image.open(image_path).convert("RGB")
@@ -141,16 +145,17 @@ def run_mmu(model, prompting, vq_model, adapter_path: str, image_path: str, ques
 
     with torch.no_grad():
         output_ids = model.generate(
-            input_ids=input_ids,
-            max_new_tokens=2000,
-            temperature=1.0,
-            pad_token_id=prompting.text_tokenizer.pad_token_id,
-            eos_token_id=prompting.text_tokenizer.eos_token_id,
-            do_sample=False,
-            use_cache=True,
-        )
-    response = prompting.text_tokenizer.batch_decode(output_ids[:, input_ids.shape[1]:], skip_special_tokens=True)[0]
-    print("[MMU] Response:\n", response)
+                    input_ids=input_ids,
+                    max_new_tokens=2000,
+                    temperature=1.0,
+                    pad_token_id=prompting.text_tokenizer.pad_token_id,
+                    eos_token_id=prompting.text_tokenizer.eos_token_id,
+                    do_sample=False,
+                    top_p=None,
+                    use_cache=True,
+                )
+        response = prompting.text_tokenizer.batch_decode(output_ids[:, input_ids.shape[1]:], skip_special_tokens=True)[0]
+        print("[MMU] Response:\n", response)
 
 
 def main():
@@ -168,7 +173,7 @@ def main():
     adapter_path = "JO-KU/GeoUni-Reasoning-Adapter"
     vq_path = "JO-KU/Geo-MAGVIT"
     
-    model, tokenizer, prompting = load_base_model(llm_path, device)
+    model, tokenizer, prompting = load_model(llm_path, adapter_path, device)
     vq_model = load_vq_model(vq_path, device)
 
     os.makedirs(args.save_dir, exist_ok=True)
@@ -197,7 +202,7 @@ def main():
             raise ValueError("--image_path is required for mmu mode")
         if not os.path.isfile(args.image_path):
             raise FileNotFoundError(args.image_path)
-        run_mmu(model, prompting, vq_model, adapter_path, args.image_path, args.question, device)
+        run_mmu(model, prompting, vq_model, args.image_path, args.question, device)
 
 
 if __name__ == "__main__":
